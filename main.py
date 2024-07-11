@@ -2,34 +2,30 @@ def on_button_pressed_a():
     global current_ogham
     if current_ogham > 0:
         current_ogham += -1
-        music.play(music.tone_playable(tones[current_ogham], music.beat(BeatFraction.HALF)),
-            music.PlaybackMode.UNTIL_DONE)
+        glyphs[current_ogham].show_image(0)
     else:
-        music.play(music.tone_playable(40, music.beat(BeatFraction.QUARTER)),
-            music.PlaybackMode.UNTIL_DONE)
+        pass
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def on_button_pressed_b():
     global current_ogham
     if current_ogham < 19:
         current_ogham += 1
-        music.play(music.tone_playable(tones[current_ogham], music.beat(BeatFraction.HALF)),
-            music.PlaybackMode.UNTIL_DONE)
+        glyphs[current_ogham].show_image(0)
     else:
-        music.play(music.tone_playable(40, music.beat(BeatFraction.QUARTER)),
-            music.PlaybackMode.UNTIL_DONE)
+        pass
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
-tones: List[number] = []
+glyphs: List[Image] = []
 current_ogham = 0
 basic.show_leds("""
     . . # . .
     . . # . .
     . . # . .
     . . # . .
-    . . # . .
+    . . # # .
     """)
-current_ogham = 5
+current_ogham = 0
 numbers = [1,
     2,
     3,
@@ -90,7 +86,147 @@ tones = [98,
     123.47 * 8,
     146.83 * 8,
     164.81 * 8]
+glyphs = [images.create_image("""
+        . . # . .
+        . . # . .
+        . . # . .
+        . . # . .
+        . . # # .
+        """),
+    images.create_image("""
+        . . # . .
+        . . # . .
+        . . # . .
+        . . # # .
+        . . # # .
+        """),
+    images.create_image("""
+        . . # . .
+        . . # . .
+        . . # # .
+        . . # # .
+        . . # # .
+        """),
+    images.create_image("""
+        . . # . .
+        . . # # .
+        . . # # .
+        . . # # .
+        . . # # .
+        """),
+    images.create_image("""
+        . . # # .
+        . . # # .
+        . . # # .
+        . . # # .
+        . . # # .
+        """),
+    images.create_image("""
+        . . # . .
+        . . # . .
+        . . # . .
+        . . # . .
+        . # # . .
+        """),
+    images.create_image("""
+        . . # . .
+        . . # . .
+        . . # . .
+        . # # . .
+        . # # . .
+        """),
+    images.create_image("""
+        . . # . .
+        . . # . .
+        . # # . .
+        . # # . .
+        . # # . .
+        """),
+    images.create_image("""
+        . . # . .
+        . # # . .
+        . # # . .
+        . # # . .
+        . # # . .
+        """),
+    images.create_image("""
+        . # # . .
+        . # # . .
+        . # # . .
+        . # # . .
+        . # # . .
+        """),
+    images.create_image("""
+        . . # . .
+        . . # . .
+        . . # . .
+        . . # . .
+        # # # # #
+        """),
+    images.create_image("""
+        . . # . .
+        . . # . .
+        . . # . .
+        # # # # #
+        # # # # #
+        """),
+    images.create_image("""
+        . . # . .
+        . . # . .
+        # # # # #
+        # # # # #
+        # # # # #
+        """),
+    images.create_image("""
+        . . # . .
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        """),
+    images.create_image("""
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        # # # # #
+        """),
+    images.create_image("""
+        . . # . .
+        . . # . .
+        . . # . .
+        . . # . .
+        . # # # .
+        """),
+    images.create_image("""
+        . . # . .
+        . . # . .
+        . . # . .
+        . # # # .
+        . # # # .
+        """),
+    images.create_image("""
+        . . # . .
+        . . # . .
+        . # # # .
+        . # # # .
+        . # # # .
+        """),
+    images.create_image("""
+        . . # . .
+        . # # # .
+        . # # # .
+        . # # # .
+        . # # # .
+        """),
+    images.create_image("""
+        . # # # .
+        . # # # .
+        . # # # .
+        . # # # .
+        . # # # .
+        """)]
 
 def on_forever():
-    pass
+    music.ring_tone(tones[current_ogham])
 basic.forever(on_forever)

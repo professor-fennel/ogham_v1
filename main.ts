@@ -2,22 +2,19 @@ input.onButtonPressed(Button.A, function () {
     if (current_ogham > 0) {
         current_ogham += -1
         glyphs[current_ogham].showImage(0)
-        music.play(music.tonePlayable(tones[current_ogham], music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
     } else {
-        music.play(music.tonePlayable(40, music.beat(BeatFraction.Quarter)), music.PlaybackMode.UntilDone)
+    	
     }
 })
 input.onButtonPressed(Button.B, function () {
     if (current_ogham < 19) {
         current_ogham += 1
         glyphs[current_ogham].showImage(0)
-        music.play(music.tonePlayable(tones[current_ogham], music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
     } else {
-        music.play(music.tonePlayable(40, music.beat(BeatFraction.Quarter)), music.PlaybackMode.UntilDone)
+    	
     }
 })
 let glyphs: Image[] = []
-let tones: number[] = []
 let current_ogham = 0
 basic.showLeds(`
     . . # . .
@@ -71,7 +68,7 @@ let letters = [
 "E",
 "I"
 ]
-tones = [
+let tones = [
 98,
 110,
 123.47,
@@ -236,5 +233,5 @@ images.createImage(`
     `)
 ]
 basic.forever(function () {
-	
+    music.ringTone(tones[current_ogham])
 })
